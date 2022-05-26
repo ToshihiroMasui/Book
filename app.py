@@ -20,14 +20,6 @@ import pytz #タイムゾーン設定
 import requests #ISBN 書籍情報
 import xml.etree.ElementTree as et 
 
-import cv2  #カメラ情報
-
-from pyzbar.pyzbar import decode
-from pyzbar.pyzbar import ZBarSymbol
-import re
-import numpy as np
-import math
-
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SECRET_KEY'] = os.urandom(24)
