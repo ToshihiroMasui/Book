@@ -105,7 +105,7 @@ def delete(id):
     db.session.delete(book)
     db.session.commit()
     
-    return redirect('/')
+    return redirect('/index')
 
 
 @app.route('/isbn', methods=['GET', 'POST'])
@@ -126,7 +126,7 @@ def fetch_book_data():
         book = Book(title=title, creator=creator)
         db.session.add(book)
         db.session.commit()
-        return redirect('/')
+        return redirect('/index')
 
     else: 
         return render_template('isbn.html')

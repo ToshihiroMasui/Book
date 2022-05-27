@@ -5,27 +5,34 @@
 {% block content %}
 
 
-<nav class="navbar sticky-top navbar-light bg-info bg-gradient">
-    <div class="container-fluid">
-      <a href="/" class="navbar-brand" href="#">図書管理アプリ</a>
-      <a href="/logout" role="button" class="navbar-brand" style="float: right;">ログアウト</a>
-      <a href="/create" role="button" class="navbar-brand" style="float: right;">新規登録画面</a>
-      <a href="/isbn" role="button" class="navbar-brand" style="float: right;">ISBN登録画面</a>
+<!-- header -->
+<header class="header ">
+    <div class="container">
+      <h1 class="header-logo">
+        <a href="index">TOSHIHIRO MASUI</a>
+      </h1>
+      <nav class="gnav">
+        <ul class="gnav-list">
+            <li class="gnav-item"><a href="/isbn" role="button">ISBN登録画面</a></li>
+            <li class="gnav-item"><a href="/create" role="button">新規登録画面</a></li>
+            <li class="gnav-item"><a href="/logout" role="button">ログアウト</a></li>
+        </ul>
+      </nav>
     </div>
-  </nav>   
+  </header>
+  <!-- /header -->  
 
 <div class = "container">
-    <table class="table">
+    <table class="">
         <thead>
             <tr>
                 
-                <th scope="col">タイトル</th>
-                <th scope="col">著者</th>
-                <a href="" role=" = button">削除</a>
+                <th scope="">タイトル</th>
+                <th scope="">著者</th>
             </tr>
         </thead>
         <tbody>
-            <table class="table table-striped">
+            <table class="">
                 {% for book in books %}
                     <tr>
                         
