@@ -1,74 +1,30 @@
 {% extends "base.html" %}
 {% block title %}蔵書管理{% endblock title %}
 
-
 {% block content %}
 
-
-<!-- header -->
-<header class="header ">
-    <div class="container">
-      <h1 class="header-logo">
-        <a href="index">TOSHIHIRO MASUI</a>
-      </h1>
-      <nav class="gnav">
-        <ul class="gnav-list">
-            <li class="gnav-item"><a href="/isbn" role="button">ISBN登録画面</a></li>
-            <li class="gnav-item"><a href="/create" role="button">新規登録画面</a></li>
-            <li class="gnav-item"><a href="/logout" role="button">ログアウト</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <!-- /header -->  
-
 <main class="content">
-    <div class="mv">
-    <table class="">
-        <thead>
+  <div class="mv">
+    <table>
+      <thead>
+        <tr>
+          <th scope="">タイトル</th>
+          <th scope="">著者</th>
+        </tr>
+      </thead>
+      <tbody>
+        <table>
+          {% for book in books %}
             <tr>
-                <th scope="">タイトル</th>
-                <th scope="">著者</th>
+              <td><h3>{{ book.title }}</h3></td>
+              <td><h3>{{ book.creator }}</h3></td>
+              <td><h3><a href="/{{book.id}}/delete" role=" = button">削除</a></h3></td>
             </tr>
-        </thead>
-        <tbody>
-            <table class="">
-                {% for book in books %}
-                    <tr>
-                        
-                        <td><h3>{{ book.title }}</h3></td>
-                        <td><h3>{{ book.creator }}</h3></td>
-                        <td><h3><a href="/{{book.id}}/delete" role=" = button">削除</a></h3></td>
-                    </tr>
-                {% endfor %}
-            
-            </table>
-        </tbody>
+          {% endfor %}
+        </table>
+      </tbody>
     </table>
-</div>
-
-<!-- contact -->
-<section class="contact section" id="contact">
-    <div class="container">
-      <h2 class="title">CONTACT</h2>
-      <p class="lead">
-        お問い合わせは、<br class="sp-only">SNSかメールにてお願いいたします。
-      </p>
-      <div class="contact-list">
-        <a class="contact-item" href="https://twitter.com/" target="_blank" rel="noopener">Twitter</a>
-        <a class="contact-item" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
-        <span class="contact-item">xxxxxx@gmail.com</span>
-      </div>
-    </div>
-  </section>
-  <!-- /contact -->
-
+  </div>
 </main>
-
-<!-- footer -->
-<footer class="footer">
-    <div class="copyright">&copy;TARO YAMADA</div>
-  </footer>
-  <!-- /footer -->
 
 {% endblock %}

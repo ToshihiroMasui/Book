@@ -42,7 +42,11 @@ class Book(db.Model): #Bookテーブル作成
 def load_user(user_id):
     return User.query.get(int(user_id))
     
-@app.route("/")
+@app.route("/") 
+def portfolio():
+    return render_template('portfolio.html')
+
+@app.route("/top") 
 def top():
     return render_template('top.html')
 
