@@ -79,7 +79,7 @@ def login():
         user = User.query.filter_by(username=username).first()
         if check_password_hash(user.password, password):
             login_user(user)
-            return redirect('/')
+            return redirect('/index')
     else:
         return render_template('login.html')
 

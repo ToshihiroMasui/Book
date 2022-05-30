@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/ress.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
         <title>ログイン画面</title>
     </head>
     <body>
@@ -26,14 +27,16 @@
             <!-- /header -->
 			<main class="content">
 				<div class="mv">
-					<form method="POST" class="form-signin">       
-		    			<h3>Login</h3>
-						<input type="text" name="username" placeholder="ユーザー名" required="" autofocus="" />
-						<input type="password" name="password" placeholder="パスワード" required=""/>     		  
-						<button class="btn btn-lg btn-primary btn-block" value="ログイン" type="submit">ログイン</button>  			
+					<form method="POST">       
+						<h3>ログイン</h3>
+						<input type="text" class="" name="username" placeholder="ユーザー名" required="" autofocus="" />
+						<input type="password" class="" name="password" placeholder="パスワード" required=""/>     		  
+						<button class="" value="ログイン" type="submit">ログイン</button>
 					</form>
 				</div>
 			</main>
+
+		
 
 			<!-- /contact -->
 			<div class="page-top" id="js-page-top">
