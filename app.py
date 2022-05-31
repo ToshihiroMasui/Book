@@ -12,7 +12,6 @@ from matplotlib.pyplot import title
 from flask_login import UserMixin,LoginManager, login_user,logout_user, login_required #ログイン機能
 from werkzeug.security import generate_password_hash,check_password_hash #パスワードハッシュ化とチェック
 import os
-from flask_bootstrap import Bootstrap #ブートストラップ
 
 from datetime import datetime #時間
 import pytz #タイムゾーン設定
@@ -24,7 +23,6 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SECRET_KEY'] = os.urandom(24)
 db = SQLAlchemy(app)
-bootstrap = Bootstrap(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -44,10 +42,24 @@ class Book(db.Model): #Bookテーブル作成
 def load_user(user_id):
     return User.query.get(int(user_id))
     
+@app.route("/") 
+def portfolio():
+    return render_template('portfolio.html')
 
-@app.route("/")
+@app.route("/top") 
+def top():
+    return render_template('top.html')
+
+@app.route("/index")
 def index():
     books = Book.query.all()
+    # books = db.session.query(Book).order_by(Book.id.desc()).all()
+
+
+
+
+            
+
     return render_template('index.html', books=books)
 
 
@@ -74,7 +86,7 @@ def login():
         user = User.query.filter_by(username=username).first()
         if check_password_hash(user.password, password):
             login_user(user)
-            return redirect('/')
+            return redirect('/index')
     else:
         return render_template('login.html')
 
@@ -104,7 +116,7 @@ def delete(id):
     db.session.delete(book)
     db.session.commit()
     
-    return redirect('/')
+    return redirect('/index')
 
 
 @app.route('/isbn', methods=['GET', 'POST'])
@@ -125,7 +137,7 @@ def fetch_book_data():
         book = Book(title=title, creator=creator)
         db.session.add(book)
         db.session.commit()
-        return redirect('/')
+        return redirect('/index')
 
     else: 
         return render_template('isbn.html')
