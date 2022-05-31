@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/ress.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+        <title>ログイン画面</title>
         <title>新規登録画面</title>
     </head>
     <body>
@@ -26,12 +28,23 @@
             <!-- /header -->
 			<main class="content">
 				<div class="mv">
-					<form method="POST">       
-						<h3>新規登録</h3>
-						<input type="text" name="username" placeholder="ユーザー名" required="" autofocus="" />
-						<input type="password" name="password" placeholder="パスワード" required=""/>     		  
-						<button value="ログイン" type="submit">登録</button>  			
-					</form>	
+					<div id="form">
+						<p class="form-title">新規登録</p>
+						<form method="POST">
+							<p>Username</p>
+						  	<p class="username">
+								<input type="text" name="username" placeholder="ユーザー名" required="" autofocus=""/>
+						  	</p>
+						  	<p>Password</p>
+						  	<p class="pass">
+								<input type="password" name="password" placeholder="パスワード" required="" />
+						  	</p>
+						  
+						  	<p class="submit">
+								<input type="submit" value="登録" />
+						  	</p>
+						</form>
+					</div>
 				</div>
 			</main>
 

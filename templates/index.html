@@ -4,6 +4,9 @@
 {% block content %}
 
 <main class="content">
+  
+
+
   <div class="mv">
     <table>
       <thead>
@@ -13,15 +16,13 @@
         </tr>
       </thead>
       <tbody>
-        <table>
-          {% for book in books %}
-            <tr>
-              <td><h3>{{ book.title }}</h3></td>
-              <td><h3>{{ book.creator }}</h3></td>
-              <td><h3><a href="/{{book.id}}/delete" role=" = button">削除</a></h3></td>
-            </tr>
-          {% endfor %}
-        </table>
+        {% for book in books %}
+          <tr>
+            <td><h3>{{ book.title }}</h3></td>
+            <td><h3>{{ book.creator }}</h3></td>
+            <td><h3><a href="/{{book.id}}/delete" role=" = button">削除</a></h3></td>
+          </tr>
+        {% endfor %}
       </tbody>
     </table>
   </div>

@@ -53,6 +53,13 @@ def top():
 @app.route("/index")
 def index():
     books = Book.query.all()
+    # books = db.session.query(Book).order_by(Book.id.desc()).all()
+
+
+
+
+            
+
     return render_template('index.html', books=books)
 
 
