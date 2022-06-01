@@ -43,26 +43,20 @@ def load_user(user_id):
     return User.query.get(int(user_id))
     
 @app.route("/") 
-def portfolio():
-    return render_template('portfolio.html')
-
-@app.route("/top") 
 def top():
     return render_template('top.html')
 
-@app.route("/index")
+@app.route("/index",methods=['GET','POST'])
 def index():
-    books = Book.query.all()
-    # books = db.session.query(Book).order_by(Book.id.desc()).all()
-
-
-
-
-            
-
+    if request.method == 'POST':
+        if request.form.get('sort') == 'asc':
+            books = db.session.query(Book).order_by(Book.id.asc()).all()
+        elif request.form.get('sort') == 'desc':
+            books = db.session.query(Book).order_by(Book.id.desc()).all()
+    else:
+        books = Book.query.all()
     return render_template('index.html', books=books)
-
-
+    
 @app.route("/signup",methods=['GET','POST'])
 def signup():
     if request.method == 'POST':
