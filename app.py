@@ -99,7 +99,7 @@ def create():
         book = Book(title=title, creator=creator)
         db.session.add(book)
         db.session.commit()
-        return redirect('/')
+        return redirect('/index')
     else:
         return render_template('create.html')
 
