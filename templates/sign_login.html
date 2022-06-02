@@ -4,43 +4,37 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/ress.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/top.css') }}"> -->
         <title>{% block title %}{% endblock title %}</title>
     </head>
     <body>
         <div class="wrapper">
+      
             <!-- header -->
             <header class="header ">
-              <div class="container">
-                  <h1 class="header-logo">
-                      <a href="">TOSHIHIRO MASUI</a>
-                  </h1>
-                  <nav class="gnav">
-                      <ul class="gnav-list">
-                        <li class="gnav-item"><a href="/signup" role="button">Sign up</a></li>
-                        <li class="gnav-item"><a href="/login" role="button">Login</a></li>
-                        
-                      </ul>
-                    </nav>
-              </div>
-          </header>
-          <!-- /header -->
+                <div class="container">
+                    <h1 class="header-logo">
+                        <a href="">TOSHIHIRO MASUI</a>
+                    </h1>
+                    <nav class="gnav">
+                        <ul class="gnav-list">
+                          <li class="gnav-item"><a href="/signup" role="button">Sign up</a></li>
+                          <li class="gnav-item"><a href="/login" role="button">Login</a></li>
+                          
+                        </ul>
+                      </nav>
+                </div>
+            </header>
+            <!-- /header -->
             {% block content%}{% endblock %}
-
-            <!-- /contact -->
-            <div class="page-top" id="js-page-top">
-                <span class="material-icons-outlined">expand_less</span>
-            </div>
-    
-
             <!-- footer -->
             <footer class="footer">
-            <div class="copyright">&copy;TOSHIHIRO MASUI</div>
+                <div class="copyright">&copy;TOSHIHIRO MASUI</div>
             </footer>
             <!-- /footer -->
-
-
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script type='text/javascript' src="js/script.js"></script>

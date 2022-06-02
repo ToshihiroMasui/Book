@@ -1,69 +1,12 @@
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/ress.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-        <title>TOPページ</title>
-    </head>
-    <body>
-        <div class="wrapper">
-      
-            <!-- header -->
-            <header class="header ">
-                <div class="container">
-                    <h1 class="header-logo">
-                        <a href="">TOSHIHIRO MASUI</a>
-                    </h1>
-                    <nav class="gnav">
-                        <ul class="gnav-list">
-                          <li class="gnav-item"><a href="/signup" role="button">Sign up</a></li>
-                          <li class="gnav-item"><a href="/login" role="button">Login</a></li>
-                          
-                        </ul>
-                      </nav>
-                </div>
-            </header>
-            <!-- /header -->
-      
-            <main class="content">
-      
-                <!-- mv -->
-                <div class="mv">
-                    <button><a href="/index" role="button"><h1>ようこそ</h1></a></button>
-                </div>
-                <!-- /mv -->
-        
-                
-                <!-- contact -->
-                <section class="contact section" id="contact">
-                    <div class="container">
-                        <h2 class="title">CONTACT</h2>
-                        <p class="lead">
-                    お問い合わせは、<br class="sp-only">SNSかメールにてお願いいたします。
-                        </p>
-                        <div class="contact-list">
-                            <a class="contact-item" href="https://twitter.com/" target="_blank" rel="noopener">Twitter</a>
-                            <a class="contact-item" href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
-                            <span class="contact-item">xxxxxx@gmail.com</span>
-                        </div>
-                    </div>
-                </section>
-                <!-- /contact -->
-                <div class="page-top" id="js-page-top">
-                    <span class="material-icons-outlined">expand_less</span>
-                </div>
-            </main>
-      
-            <!-- footer -->
-            <footer class="footer">
-                <div class="copyright">&copy;TARO YAMADA</div>
-            </footer>
-            <!-- /footer -->
-        </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script type='text/javascript' src="js/script.js"></script>
-    </body>
-</html>
+{% extends "sign_login.html" %}
+{% block title %}TOPページ{% endblock title %}
+
+{% block content%}
+
+<!-- mv -->
+<div class="mv" style="background-image:url(/static/images/bg.png); opacity:0.8;">
+    <button style="color:white;"><a href="/index" role="button"><h1>ようこそ</h1></a></button>
+</div>
+<!-- /mv -->
+
+{% endblock %}
