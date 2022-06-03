@@ -1,5 +1,6 @@
 <head>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/pagenation.css') }}">
 </head>
 {% extends "base.html" %}
 
@@ -24,7 +25,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for book in books %}
+        {% for book in books.items %}
           <tr>
             <td><h3>{{ book.title }}</h3></td>
             <td><h3>{{ book.creator }}</h3></td>
@@ -33,6 +34,21 @@
         {% endfor %}
       </tbody>
     </table>
+  </div>
+  <div class="pager">
+    <ul class="pagination">
+       {% for page in books.iter_pages() %}
+        {% if page %}
+          {% if page != books.page %}
+              <li><a  href="{{ url_for('index_pages', page_num=page) }}"><span>{{ page }}</span></a></li>
+          {% else %}
+              <li class=" active"><a><span>{{ page }}</span></a></li>
+          {% endif %}
+        {% else %}
+          <span> ... </span>
+        {% endif %}
+      {% endfor %}
+    </ul>
   </div>
 </main>
 
