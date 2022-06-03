@@ -1,3 +1,4 @@
+from ensurepip import bootstrap
 from flask import Flask #flask使用
 from flask import render_template, request , redirect #htmlテンプレート機能を使用
 from flask_sqlalchemy import SQLAlchemy #DB作成およびSQL操作のため
@@ -22,7 +23,9 @@ import xml.etree.ElementTree as et
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SECRET_KEY'] = os.urandom(24)
+app.config['ITEMS_PER_PAGE'] = 10
 db = SQLAlchemy(app)
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -43,26 +46,29 @@ def load_user(user_id):
     return User.query.get(int(user_id))
     
 @app.route("/") 
-def portfolio():
-    return render_template('portfolio.html')
-
-@app.route("/top") 
 def top():
     return render_template('top.html')
 
-@app.route("/index")
+@app.route("/index",methods=['GET','POST'])
 def index():
-    books = Book.query.all()
-    # books = db.session.query(Book).order_by(Book.id.desc()).all()
+    # if request.method == 'POST':
+    #     if request.form.get('sort') == 'asc':
+    #         books = db.session.query(Book).order_by(Book.id.asc()).all()
+    #     elif request.form.get('sort') == 'desc':
+    #         books = db.session.query(Book).order_by(Book.id.desc()).all()
+    # else:
+    #     books = Book.query.all()
+    # return render_template('index.html', books=books)
 
-
-
-
-            
-
+    books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
     return render_template('index.html', books=books)
 
+@app.route('/pages/<int:page_num>', methods=['GET','POST'])
+def index_pages(page_num):
 
+    books = Book.query.paginate(page=page_num, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
+    return render_template('index.html', books=books)
+    
 @app.route("/signup",methods=['GET','POST'])
 def signup():
     if request.method == 'POST':
@@ -105,7 +111,7 @@ def create():
         book = Book(title=title, creator=creator)
         db.session.add(book)
         db.session.commit()
-        return redirect('/')
+        return redirect('/index')
     else:
         return render_template('create.html')
 
@@ -141,3 +147,4 @@ def fetch_book_data():
 
     else: 
         return render_template('isbn.html')
+

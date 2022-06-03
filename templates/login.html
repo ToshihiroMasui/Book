@@ -1,51 +1,26 @@
-<!DOCTYPE html>
-<html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/ress.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-        <title>ログイン画面</title>
-    </head>
-    <body>
-        <div class="wrapper">
-            <!-- header -->
-            <header class="header ">
-				<div class="container">
-                	<h1 class="header-logo">
-                  		<a href="login">TOSHIHIRO MASUI</a>
-                	</h1>
-                	<nav class="gnav">
-                  		<ul class="gnav-list">
-							<li class="gnav-item"><a href="/signup" role="button">新規登録</a></li>
-                  		</ul>
-                	</nav>
-				</div>
-            </header>
-            <!-- /header -->
-			<main class="content">
-				<div class="mv">
-					<div id="form">
-						<p class="form-title">ログイン</p>
-						<form method="POST">
-							<p>Username</p>
-						  	<p class="username">
-								<input type="text" name="username" placeholder="ユーザー名" required="" autofocus=""/>
-						  	</p>
-						  	<p>Password</p>
-						  	<p class="pass">
-								<input type="password" name="password" placeholder="パスワード" required="" />
-						  	</p>
-						  
-						  	<p class="submit">
-								<input type="submit" value="Login" />
-						  	</p>
-						</form>
-					</div>
-				</div>
-			</main>
+{% extends "sign_login.html" %}
+{% block title %}ログイン{% endblock title %}
+{% block content%}
+	<div class="mv">
+		<div id="form">
+			<p class="form-title">ログイン</p>
+			<form method="POST">
+				<p>Username</p>
+				<p class="username">
+					<input type="text" name="username" placeholder="ユーザー名" required="" autofocus=""/>
+				</p>
+				<p>Password</p>
+				<p class="pass">
+					<input type="password" name="password" placeholder="パスワード" required="" />
+				</p>
+				
+				<p class="submit">
+					<input type="submit" value="Login" />
+				</p>
+			</form>
+		</div>
+	</div>
+{% endblock %}
 
 		
 
