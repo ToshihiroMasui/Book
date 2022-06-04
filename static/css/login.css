@@ -27,6 +27,24 @@ body,p,form,input {
     font-size: 14px;
     border: solid #555 2px;
   }
+
+  #search{
+    width: 150px;
+    padding: 4px;
+    font-size: 14px;
+    border: solid #555 2px;
+  }
+  .btn{
+    padding: 4px;
+    color: #fff;
+    background-color: #eb6100;
+    border-radius:3px;
+  }
+  .btn:hover{
+    color: #fff;
+    background: #f56500;
+
+  }
   .submit {
     text-align: right;
   } /* font */
