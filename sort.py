@@ -23,3 +23,8 @@
 #     else:
 #         books = Book.query.all()
 #     return render_template('test.html', books = books ,search = search)
+
+
+
+# books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
+#     return render_template('index.html', books=books,search = search)
