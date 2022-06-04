@@ -56,16 +56,6 @@ def top():
 
 @app.route("/index",methods=['GET','POST'])
 def index():
-    # if request.method == 'POST':
-    #     if request.form.get('sort') == 'asc':
-    #         books = db.session.query(Book).order_by(Book.id.asc()).all()
-    #     elif request.form.get('sort') == 'desc':
-    #         books = db.session.query(Book).order_by(Book.id.desc()).all()
-    # else:
-    #     books = Book.query.all()
-    # return render_template('index.html', books=books)
-
-   
     books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
     return render_template('index.html', books=books)
 
@@ -160,20 +150,14 @@ def fetch_book_data():
         return render_template('isbn.html')
 
 
-
-# import cv2
-# from pyzbar.pyzbar import decode
-# from pyzbar.pyzbar import ZBarSymbol
-# import re
-# import numpy as np
-# import math
-
-# @app.route('/test',methods=["GET", "POST"])
-# def test():
-    # if request.method == 'POST':
-    #     if request.form.get('send') == 'aaa':
-    #         m = '成功'
-    #         return render_template('test.html', message=m)
-    # else:
-    #     m = '押してください'
-    #     return render_template('test.html', message=m)
+@app.route("/test",methods=['GET','POST'])
+def search():
+    search = request.form.get('search')
+    if not search == "":
+        if request.method == 'POST':
+            books = db.session.query(Book).filter(Book.title.contains(search)).all()
+        else:
+            books = Book.query.all()
+    else:
+        books = Book.query.all()
+    return render_template('test.html', books = books ,search = search)

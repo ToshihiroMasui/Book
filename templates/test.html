@@ -1,14 +1,33 @@
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
+</head>
+
 {% extends "base.html" %}
 {% block content%}
 
 <main class="content">
     <div class="mv">
-        <p>{{ message }}</p>
         
-        <form method="POST">
-            <input type="submit" name="send" value="aaa">
+        
+        <form action="/test" method="post">
+            <input id="search" type="text" name="search">
+            <input class="btn" type="submit" value="検  索">
         </form>
-        </body>
+
+
+        <table>
+            
+            <tbody>
+              {% for book in books %}
+                <tr>
+                  <td><h3>{{ book.title }}</h3></td>
+                  <td><h3>{{ book.creator }}</h3></td>
+                  <td class="delete"><h3><a href="/{{book.id}}/delete" role=" = button">削除</a></h3></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        
 
     </div>
 </main>
