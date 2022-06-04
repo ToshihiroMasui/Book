@@ -56,8 +56,15 @@ def top():
 
 @app.route("/index",methods=['GET','POST'])
 def index():
-    books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
-    return render_template('index.html', books=books)
+    search = request.form.get('search')
+    if methods == "POST":
+        if not search =="":
+            books = db.session.query(Book).filter(Book.title.contains(search)).all()
+        else:
+            books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
+    else:
+        books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
+    return render_template('index.html', books=books,search = search)
 
 
 
