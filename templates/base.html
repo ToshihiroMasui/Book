@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/ress.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
         <title>{% block title %}{% endblock title %}</title>
     </head>
     <body>
@@ -14,22 +16,23 @@
             <header class="header ">
               <div class="container">
                   <h1 class="header-logo">
-                      <a href="">TOSHIHIRO MASUI</a>
+                      <a href="/index">TOSHIHIRO MASUI</a>
                   </h1>
                   <nav class="gnav">
                     <ul class="gnav-list">
                       <li class="gnav-item"><a href="/isbn" role="button">ISBN登録画面</a></li>
                       <li class="gnav-item"><a href="/create" role="button">新規登録画面</a></li>
                       <li class="gnav-item"><a href="/logout" role="button">ログアウト</a></li>
-                      <div id="search1">
-</div>
+                      <form action= method="post">
+                        <input id="search" type="text" name="search">
+                        <input class="btn" type="submit" value="検  索">
+                      </form>
                     </ul>
                   </nav>
               </div>
           </header>
           <!-- /header -->
             {% block content%}{% endblock %}
-
             <!-- /contact -->
             <div class="page-top" id="js-page-top">
                 <span class="material-icons-outlined">expand_less</span>

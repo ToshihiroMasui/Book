@@ -3,15 +3,23 @@
 {% block content%}
 <main class="content">
     <div class="mv">
-
-        <h1>新規登録</h1>
-        <form method = "POST" >
-            <label for="title">タイトル</label>
-            <input type="text" name="title">
-            <label for="creator">著者</label>
-            <input type="text" name="creator">
-            <input type="submit" value="新規登録">
-        </form>
+        <div id="form">
+            <p class="form-title">簡単入力</p>
+            <form method="POST">
+				<p>タイトル</p>
+				<p class="username">
+					<input type="text" name="title" required="" autofocus=""/>
+				</p>
+				<p>著者</p>
+				<p class="pass">
+					<input type="text" name="creator" required="" />
+				</p>
+				
+				<p class="submit">
+					<input type="submit" value="登録" />
+				</p>
+			</form>
+        </div>
     </div>
 </main>
 

@@ -18,10 +18,8 @@
   <div class="mv">
     <table>
       <thead>
-        <tr>
-          <th scope="">タイトル</th>
-          <th scope="">著者</th>
-
+        <tr><th scope="" style="width: 70%;"><h2 style="background-color: #FFBC61;">タイトル</h2></th>
+          <th spe="" style="width: 30%;"><h2 style="background-color: #FFBC61;">著者</h2></th>
         </tr>
       </thead>
       <tbody>
@@ -29,7 +27,7 @@
           <tr>
             <td><h3>{{ book.title }}</h3></td>
             <td><h3>{{ book.creator }}</h3></td>
-            <td><h3><a href="/{{book.id}}/delete" role=" = button">削除</a></h3></td>
+            <td class="delete"><h3><a href="/{{book.id}}/delete" role=" = button">削除</a></h3></td>
           </tr>
         {% endfor %}
       </tbody>
