@@ -20,10 +20,15 @@ import pytz #タイムゾーン設定
 import requests #ISBN 書籍情報
 import xml.etree.ElementTree as et 
 
+
+
+
+
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SECRET_KEY'] = os.urandom(24)
-app.config['ITEMS_PER_PAGE'] = 10
+app.config['ITEMS_PER_PAGE'] = 5
 db = SQLAlchemy(app)
 
 
@@ -60,8 +65,14 @@ def index():
     #     books = Book.query.all()
     # return render_template('index.html', books=books)
 
+   
     books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
     return render_template('index.html', books=books)
+
+
+
+
+            
 
 @app.route('/pages/<int:page_num>', methods=['GET','POST'])
 def index_pages(page_num):
@@ -148,3 +159,21 @@ def fetch_book_data():
     else: 
         return render_template('isbn.html')
 
+
+
+# import cv2
+# from pyzbar.pyzbar import decode
+# from pyzbar.pyzbar import ZBarSymbol
+# import re
+# import numpy as np
+# import math
+
+# @app.route('/test',methods=["GET", "POST"])
+# def test():
+    # if request.method == 'POST':
+    #     if request.form.get('send') == 'aaa':
+    #         m = '成功'
+    #         return render_template('test.html', message=m)
+    # else:
+    #     m = '押してください'
+    #     return render_template('test.html', message=m)
