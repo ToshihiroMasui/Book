@@ -1,11 +1,25 @@
+table{
+	width: 1200px;
+	height: 400px;
+}
+
 td {
 	padding: 2px;
 }
 
 tr:nth-child(even) {
-	background: #add8e6;
+	background-color: #f7cd96;
 }
 
 tr:nth-child(odd) {
-	background: #e0ffff;
+	background-color: #FFF4E0;
+}
+tr{
+	height: 20%;
+}
+tr h3{
+	text-align: center;
+}
+.delete{
+	background-color: white;
 }

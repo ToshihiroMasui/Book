@@ -3,13 +3,21 @@
 
 <main class="content">
   <div class="mv">
+    <div id="form">
+			<p class="form-title">ISBNで登録</p>
+			<form method="POST">
+				<p>ISBN</p>
+				<p class="username">
+					<input type="number" name="isbn" placeholder="" required="" autofocus=""/>
+				</p>
+				
+				<p class="submit">
+					<input type="submit" value="登録" />
+				</p>
+			</form>
+		</div>
 
-    <h1>新規登録 ISBN</h1>
-    <form method = "POST" >
-        <label>ISBN</label>
-        <input type="number" name="isbn">
-        <input type="submit" value="新規登録">
-    </form>
+
   </div>
 </main>
 

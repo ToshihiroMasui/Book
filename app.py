@@ -20,10 +20,15 @@ import pytz #タイムゾーン設定
 import requests #ISBN 書籍情報
 import xml.etree.ElementTree as et 
 
+
+
+
+
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
 app.config['SECRET_KEY'] = os.urandom(24)
-app.config['ITEMS_PER_PAGE'] = 10
+app.config['ITEMS_PER_PAGE'] = 5
 db = SQLAlchemy(app)
 
 
@@ -51,17 +56,21 @@ def top():
 
 @app.route("/index",methods=['GET','POST'])
 def index():
-    # if request.method == 'POST':
-    #     if request.form.get('sort') == 'asc':
-    #         books = db.session.query(Book).order_by(Book.id.asc()).all()
-    #     elif request.form.get('sort') == 'desc':
-    #         books = db.session.query(Book).order_by(Book.id.desc()).all()
-    # else:
-    #     books = Book.query.all()
-    # return render_template('index.html', books=books)
+    search = request.form.get('search')
+    if request.method == 'POST':
+        if not search == "":
+            books = db.session.query(Book).filter(Book.title.contains(search)).paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
+           
+        else:
+            books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
+    else:
+        books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
+    return render_template('index.html', books=books,search = search)
 
-    books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
-    return render_template('index.html', books=books)
+
+
+
+            
 
 @app.route('/pages/<int:page_num>', methods=['GET','POST'])
 def index_pages(page_num):
@@ -148,3 +157,40 @@ def fetch_book_data():
     else: 
         return render_template('isbn.html')
 
+
+
+
+
+
+import cv2
+@app.route("/test",methods=['GET','POST'])
+def camera():
+    if request.method == 'POST':
+        if request.form.get('camera') == 'camera':
+
+            #カメラの設定　デバイスIDは0
+            cap = cv2.VideoCapture(0)
+
+            #繰り返しのためのwhile文
+            while True:
+                #カメラからの画像取得
+                ret, frame = cap.read()
+
+                #カメラの画像の出力
+                cv2.imshow('camera' , frame)
+
+                #繰り返し分から抜けるためのif文
+                key =cv2.waitKey(10)
+                if key == 27:
+                    break
+
+            #メモリを解放して終了するためのコマンド
+            cap.release()
+            cv2.destroyAllWindows()
+
+            return render_template('test.html')
+    else:
+        return render_template('test.html')
+
+
+                        
