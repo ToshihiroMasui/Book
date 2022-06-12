@@ -26,7 +26,7 @@ import xml.etree.ElementTree as et
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///book.db'
 app.config['SECRET_KEY'] = os.urandom(24)
 app.config['ITEMS_PER_PAGE'] = 5
 db = SQLAlchemy(app)
@@ -43,6 +43,7 @@ class User(UserMixin,db.Model): #userテーブル作成
 
 class Book(db.Model): #Bookテーブル作成
     id = db.Column(db.Integer, primary_key=True)
+    isbn = db.Column(db.BIGINT, unique = True)
     title = db.Column(db.String(50), unique = True)
     creator = db.Column(db.String(15))
     
@@ -124,6 +125,18 @@ def create():
     else:
         return render_template('create.html')
 
+@app.route("/<int:id>/update",methods=['GET','POST'])
+def update(id):
+    book = Book.query.get(id)
+    if request.method == "GET":
+        return render_template('update.html',book=book)
+    else:
+        book.title = request.form.get('title')
+        book.creator = request.form.get('creator')
+        db.session.commit()
+        return redirect('/index')
+
+
 @app.route("/<int:id>/delete",methods=['GET'])
 def delete(id):
     book = Book.query.get(id)
@@ -149,7 +162,7 @@ def fetch_book_data():
         title = root.find('.//dc:title', ns).text
         creator = root.find('.//dc:creator', ns).text
 
-        book = Book(title=title, creator=creator)
+        book = Book(title=title, creator=creator,isbn=isbn)
         db.session.add(book)
         db.session.commit()
         return redirect('/index')
