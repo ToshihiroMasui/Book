@@ -9,37 +9,47 @@
         <table>
             <thead>
                 <tr>
-                    <th>
-                        <h2>タイトル</h2>
-                    </th>
-                    <th>
-                        <h2>著者</h2>
-                    </th>
+                    <th scope="col">表紙</th>
+                    <th scope="col">タイトル</th>
+                    <th scope="col">著者</th>
                 </tr>
             </thead>
             <tbody>
                 {% for book in books.items %}
                 <tr>
-                    <td>
-                        <img src="https://iss.ndl.go.jp/thumbnail/{{ book.isbn }}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSA4LjVjMC0uODI4LjY3Mi0xLjUgMS41LTEuNXMxLjUuNjcyIDEuNSAxLjVjMCAuODI5LS42NzIgMS41LTEuNSAxLjVzLTEuNS0uNjcxLTEuNS0xLjV6bTkgLjVsLTIuNTE5IDQtMi40ODEtMS45Ni00IDUuOTZoMTRsLTUtOHptOC00djE0aC0yMHYtMTRoMjB6bTItMmgtMjR2MThoMjR2LTE4eiIvPjwvc3ZnPg==';"
-                        />
-                    </td>
-                    <td>
-                        <h3>{{ book.title }}</h3>
-                    </td>
-                    <td>
-                        <h3>{{ book.creator }}</h3>
-                    </td>
+                    <th><img src="https://iss.ndl.go.jp/thumbnail/{{ book.isbn }}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSA4LjVjMC0uODI4LjY3Mi0xLjUgMS41LTEuNXMxLjUuNjcyIDEuNSAxLjVjMCAuODI5LS42NzIgMS41LTEuNSAxLjVzLTEuNS0uNjcxLTEuNS0xLjV6bTkgLjVsLTIuNTE5IDQtMi40ODEtMS45Ni00IDUuOTZoMTRsLTUtOHptOC00djE0aC0yMHYtMTRoMjB6bTItMmgtMjR2MThoMjR2LTE4eiIvPjwvc3ZnPg==';" style="width:50px; height: 50px;"></th>
+                    <td data-label="内容" class="txt">{{ book.title }}</td>
+                    <td data-label="価格" class="price">{{ book.creator }}</td>
+
                     <td class="update">
                         <h3><a href="/{{book.id}}/update" role=" = button">編集</a></h3>
+                        
                     </td>
                     <td class="delete">
-                        <h3><a href="/{{book.id}}/delete" role=" = button">削除</a></h3>
+                        <h3><a href="/{{book.id}}/delete" role=" = button" onclick="return confirm('本当に削除しますか?')">削除</a></h3>
                     </td>
+
                 </tr>
+                
+                
                 {% endfor %}
             </tbody>
-        </table>
+        </table>   
+    
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
     </div>
     <div class="pager">
         <ul class="pagination">
