@@ -9,7 +9,7 @@
 			<form method="POST">
 				<p>ISBN</p>
 				<p class="username">
-					<input type="number" name="isbn" placeholder="" required="" autofocus=""/>
+					<input type="number" name="isbn" pattern="^[0-9]+$" maxlength="13" />
 				</p>
 				
 				<p class="submit">
