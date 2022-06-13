@@ -26,7 +26,7 @@ import xml.etree.ElementTree as et
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///blog.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///book.db'
 app.config['SECRET_KEY'] = os.urandom(24)
 app.config['ITEMS_PER_PAGE'] = 5
 db = SQLAlchemy(app)
@@ -43,6 +43,8 @@ class User(UserMixin,db.Model): #userテーブル作成
 
 class Book(db.Model): #Bookテーブル作成
     id = db.Column(db.Integer, primary_key=True)
+    isbn = db.Column(db.BIGINT, unique = True)
+    asin = db.Column(db.BIGINT, unique = True)
     title = db.Column(db.String(50), unique = True)
     creator = db.Column(db.String(15))
     
@@ -124,6 +126,18 @@ def create():
     else:
         return render_template('create.html')
 
+@app.route("/<int:id>/update",methods=['GET','POST'])
+def update(id):
+    book = Book.query.get(id)
+    if request.method == "GET":
+        return render_template('update.html',book=book)
+    else:
+        book.title = request.form.get('title')
+        book.creator = request.form.get('creator')
+        db.session.commit()
+        return redirect('/index')
+
+
 @app.route("/<int:id>/delete",methods=['GET'])
 def delete(id):
     book = Book.query.get(id)
@@ -146,13 +160,33 @@ def fetch_book_data():
 
         root = et.fromstring(res.text)
         ns = {'dc': 'http://purl.org/dc/elements/1.1/'}
-        title = root.find('.//dc:title', ns).text
-        creator = root.find('.//dc:creator', ns).text
+        if root.find('.//dc:title', ns) != None:
 
-        book = Book(title=title, creator=creator)
-        db.session.add(book)
-        db.session.commit()
-        return redirect('/index')
+            title = root.find('.//dc:title', ns).text
+            creator = root.find('.//dc:creator', ns).text
+            asin = jan_to_asin(isbn)
+            book = Book(title=title, creator=creator,isbn=isbn,asin=asin)
+            db.session.add(book)
+            db.session.commit()
+            return redirect('/index')
+        else: 
+            return render_template('isbn.html')
 
     else: 
         return render_template('isbn.html')
+
+
+def jan_to_asin(jan13):
+    s = str(jan13)[3:12]
+    a = 10
+    c = 0
+   
+    for i in range(0, len(s)):
+        c += int(s[i]) *(a-i)
+
+    d = c % 11
+    d = 11 - d 
+    if d == 10:
+        d = "X"
+    return str(s) + str(d)
+

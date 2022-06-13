@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content%}
+<main class="content">
+    <div class="mv">
+        <div id="form">
+            <p class="form-title">編集</p>
+            <form method="POST">
+				<p>タイトル</p>
+				<p class="username">
+					<input type="text" name="title" required="" autofocus="" value={{book.title}}/>
+				</p>
+				<p>著者</p>
+				<p class="pass">
+					<input type="text" name="creator" required="" value={{book.creator}}/>
+				</p>
+				
+				<p class="submit">
+					<input type="submit" value="更新" />
+				</p>
+			</form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

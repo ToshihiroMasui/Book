@@ -1,53 +1,66 @@
 <head>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/pagenation.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pagenation.css') }}">
 </head>
-{% extends "base.html" %}
-
-{% block title %}蔵書管理{% endblock title %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}蔵書管理{% endblock title %} {% block content %}
 
 <main class="content">
-  <!-- <form method="post">
-    <button type="submit" name="sort" value="desc">降順</button>
-    <button type="submit" name="sort" value="asc">昇順</button>
-  </form> -->
+    <div class="mv">
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">表紙</th>
+                    <th scope="col">タイトル</th>
+                    <th scope="col">著者</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books.items %}
+                <tr>
+                    <th><a href="http://www.amazon.co.jp/dp/{{book.asin}}"><img src="https://iss.ndl.go.jp/thumbnail/{{ book.isbn }}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSA4LjVjMC0uODI4LjY3Mi0xLjUgMS41LTEuNXMxLjUuNjcyIDEuNSAxLjVjMCAuODI5LS42NzIgMS41LTEuNSAxLjVzLTEuNS0uNjcxLTEuNS0xLjV6bTkgLjVsLTIuNTE5IDQtMi40ODEtMS45Ni00IDUuOTZoMTRsLTUtOHptOC00djE0aC0yMHYtMTRoMjB6bTItMmgtMjR2MThoMjR2LTE4eiIvPjwvc3ZnPg==';" style="width:50px; height: 50px;"></a></th>
+                    <td class="txt">{{ book.title }}</td>
+                    <td class="price">{{ book.creator }}</td>
+
+                    <td class="update">
+                        <h3><a href="/{{book.id}}/update" role=" = button">編集</a></h3>
+                        
+                    </td>
+                    <td class="delete">
+                        <h3><a href="/{{book.id}}/delete" role=" = button" onclick="return confirm('本当に削除しますか?')">削除</a></h3>
+                    </td>
+
+                </tr>
+                
+                
+                {% endfor %}
+            </tbody>
+        </table>   
+    
+        
 
 
-  <div class="mv">
-    <table>
-      <thead>
-        <tr><th scope="" style="width: 70%;"><h2 style="background-color: #FFBC61;">タイトル</h2></th>
-          <th spe="" style="width: 30%;"><h2 style="background-color: #FFBC61;">著者</h2></th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for book in books.items %}
-          <tr>
-            <td><h3>{{ book.title }}</h3></td>
-            <td><h3>{{ book.creator }}</h3></td>
-            <td class="delete"><h3><a href="/{{book.id}}/delete" role=" = button">削除</a></h3></td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-  <div class="pager">
-    <ul class="pagination">
-       {% for page in books.iter_pages() %}
-        {% if page %}
-          {% if page != books.page %}
-              <li><a  href="{{ url_for('index_pages', page_num=page) }}"><span>{{ page }}</span></a></li>
-          {% else %}
-              <li class=" active"><a><span>{{ page }}</span></a></li>
-          {% endif %}
-        {% else %}
-          <span> ... </span>
-        {% endif %}
-      {% endfor %}
-    </ul>
-  </div>
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+    <div class="pager">
+        <ul class="pagination">
+            {% for page in books.iter_pages() %} {% if page %} {% if page != books.page %}
+            <li><a href="{{ url_for('index_pages', page_num=page) }}"><span>{{ page }}</span></a></li>
+            {% else %}
+            <li class=" active"><a><span>{{ page }}</span></a></li>
+            {% endif %} {% else %}
+            <span> ... </span> {% endif %} {% endfor %}
+        </ul>
+    </div>
 </main>
 
 {% endblock %}
