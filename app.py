@@ -111,7 +111,7 @@ def login():
 #@login_required
 def logout():
     logout_user()
-    return redirect('/')
+    return redirect('/login')
 
 @app.route('/create', methods=['GET', 'POST'])
 def create():
@@ -193,30 +193,3 @@ def jan_to_asin(jan13):
     if d == 10:
         d = "X"
     return str(s) + str(d)
-
-
-
-
-import cv2
-
-
-# @app.route('/camera', methods=['GET'])
-# def camera():
-#     cap = cv2.VideoCapture(0)
-#     while True:
-#     # 1フレームずつ取得する。
-#         ret, frame = cap.read()
-#         #フレームが取得できなかった場合は、画面を閉じる
-#         if not ret:
-#             break
-            
-#         # ウィンドウに出力
-#         cv2.imshow("Frame", frame)
-#         key = cv2.waitKey(1)
-#         # Escキーを入力されたら画面を閉じる
-#         if key == 27:
-#             break
-#     cap.release()
-#     cv2.destroyAllWindows()
-#     return render_template('index.html')
-
