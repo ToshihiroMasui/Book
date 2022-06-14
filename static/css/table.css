@@ -1,81 +1,47 @@
-
-  table tr {
-	background-color: #fff;
-	padding: .35em;
-	border-bottom: 1px solid #bbb;
+p {
+	font-size: 16px;
+	font-weight: bold;
+	text-align: center;
+	margin: 60px auto 40px;
   }
-  table thead{
-	border-bottom: 5px solid #ff9900;
+  th {
+	background: #a57805;
+	border: solid 1px #ccc;
+	color: #fff;
+	padding: 10px;
   }
-  table tr:last-child{
-	 border-bottom: none
+  td {
+	border: solid 1px #ccc;
+	padding: 10px;
   }
-  table th,
-  table td {
-	padding: 1em 10px 1em 1em;
-	border-right: 1px solid #bbb;
-  }
-  table th:last-child,
-  table td:last-child{
-	  border: none;
-  }
-  tbody th {
-	  color: #ff9901;
-  }
-  .txt{
-	 text-align: left;
-	 font-size: .85em;
-  }
-  .price{
-	 text-align: right;
-  }
-  @media screen and (max-width: 600px) {
-	table {
-	  border: 0;
-	  width:100%
+  @media screen and (max-width: 640px) {
+	.tbl-r04 {
+	  width: 80%;
+	} 
+	.tbl-r04 .thead {
+	  display: none;
 	}
-	table th{
+	.tbl-r04 tr,
+	.tbl-r04 td{
 	  display: block;
-	  border-right: none;
-	  border-bottom: 5px solid #ff9901;
-	  padding-bottom: .6em;
-	  margin-bottom: .6em;
-  
-	}
-	table thead {
-	  border: none;
-	  clip: rect(0 0 0 0);
-	  height: 1px;
-	  margin: -1px;
-	  overflow: hidden;
-	  padding: 0;
-	  position: absolute;
-	  width: 1px;
-	}
-	
-	table tr {
-	  display: block;
-	  margin-bottom: 2em;
-	}
-	
-	table td {
-	  border-bottom: 1px solid #bbb;
-	  display: block;
-	  font-size: .8em;
-	  text-align: right;
+	  width: 100%;
 	  position: relative;
-	  padding: .625em .625em .625em 4em;
-	  border-right: none;
 	}
-	
-	table td::before {
-	  content: attr(data-label);
+	.tbl-r04 td:first-child:before {
+	  content: "見出し:before";
+	  background: #e9727e;
+	  box-sizing: border-box;
+	  color: #fff;
 	  font-weight: bold;
+	  height: 40px;
+	  padding: 10px;
 	  position: absolute;
-	  left: 10px;
+	  top: -41px;
+	  left: -0.2%;
+	  display: block;
+	  width: 100.5%;
 	}
-	
-	table td:last-child {
-	  border-bottom: 0;
+	.tbl-r04 tr {
+	  margin-bottom: 40px;
 	}
   }
