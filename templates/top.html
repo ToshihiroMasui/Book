@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/top.css') }}">
+</head>
 {% extends "sign_login.html" %}
 {% block title %}TOPページ{% endblock title %}
 
@@ -5,7 +8,11 @@
 
 <!-- mv -->
 <div class="mv" style="background-image:url(/static/images/bg2.jpg); opacity:0.8;">
-    <button style="color:white;"><a href="/index" role="button"><h1>ようこそ</h1></a></button>
+    <!-- <button style="color:white;"><a href="/index" role="button"><h1>ようこそ</h1></a></button> -->
+    <button>
+        <span><a href="/index" role="button">ようこそ　本の世界へ</a></span>
+    </button>
+      
 </div>
 <!-- /mv -->
 

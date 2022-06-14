@@ -205,7 +205,7 @@ input,
 select,
 textarea {
   border-style: none;
-  background-color: transparent;
+  /* background-color: transparent; */
 }
 
 /* Style select like a standard input */
