@@ -24,8 +24,8 @@
                       <li class="gnav-item"><a href="/isbn" role="button">ISBN登録画面</a></li>
                       <li class="gnav-item"><a href="/create" role="button">新規登録画面</a></li>
                       <li class="gnav-item"><a href="/logout" role="button">ログアウト</a></li>
-                      <form action="/index" method="post">
-                        <input id="search" type="text" placeholder="本のタイトル" name="search">
+                      <form method="POST">
+                        <input id="search" type="text" placeholder="本のタイトル" name="search-title" value="{{ session.get('title') }}">
                         <input class="btn" type="submit" value="検  索">
                       </form>
                     </ul>
