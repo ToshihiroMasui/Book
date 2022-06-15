@@ -1,23 +1,63 @@
+.book_title{
+	position: relative;
+	background: #f0c89c;
+	box-shadow: 0px 0px 0px 5px #f0c89c;
+	border: dashed 2px white;
+	padding: 0.2em 0.5em;
+	color: rgb(183, 85, 5);
+	text-align: center;
+	margin-top: 50px;
+}
+.book_title:after {
+	position: absolute;
+	content: '';
+	left: -7px;
+	top: -7px;
+	border-width: 0 0 15px 15px;
+	border-style: solid;
+	border-color: #fff #fff #f0c89c;
+	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+  }
+
 p {
 	font-size: 16px;
 	font-weight: bold;
 	text-align: center;
 	margin: 60px auto 40px;
-  }
-  th {
+}
+th {
 	background: #a57805;
 	border: solid 1px #ccc;
 	color: #fff;
 	padding: 10px;
-  }
-  td {
+}
+.img_wrap{
+	width: 50px;
+	height: 50px;
+	border: 1px solid #ddd;
+	
+	
+	transition-duration: 0.5s;
+}
+.img_wrap img{
+width: 100%;
+cursor: pointer;
+}
+.img_wrap:hover{
+box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+transform: translateY(-10px);
+transition-duration: 0.5s;
+}
+
+
+td {
 	border: solid 1px #ccc;
 	padding: 10px;
 
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
-  }
+}
   @media screen and (max-width: 640px) {
 	.tbl-r04 {
 	  width: 80%;

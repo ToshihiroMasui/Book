@@ -46,8 +46,10 @@ body,p,form,input {
 
   }
   .submit {
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
   } /* font */
+  
   #form p {
     color: black;
     font-weight: bold;
