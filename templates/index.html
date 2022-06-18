@@ -6,6 +6,7 @@
 
 <main class="content">
     <div class="book_title">
+       
         <h1>あなたの本棚</h1>
         
     </div>
@@ -13,39 +14,26 @@
         <table class="tbl-r05">
             <tr class="thead">
                 <tr>
-                    <th>表紙</th>
-                    <th>タイトル</th>
-                    <th>著者</th>
-                    <form method="POST" class="text-right">
-                        <th>{% if session['sort'] == "asc" %}
-                            <button class="btn btn-primary" type="submit" name="sort" value="asc" disabled>昇順</button>
-                        {% else %}
-                            <button class="btn btn-primary" type="submit" name="sort" value="asc">昇順</button>
-                        {% endif %}</th>
-                        <th>{% if session['sort'] == "desc" %}
-                            <button class="btn btn-danger" type="submit" name="sort" value="desc" disabled>降順</button>
-                        {% else %}
-                            <button class="btn btn-danger" type="submit" name="sort" value="desc">降順</button>
-                        {% endif %}</th>
-                    </form>
+                    <th>表紙</th>  
+                    <th class="title">タイトル</th>
+                    <th class="creator">著者</th>
+                    <th></th>
+                    <th></th>
+                    
                 </tr>
             </thead>
             <tbody>
                 {% for book in books.items %}
                 <tr>
-                    
-                    <td class="balloonoya"><a href="http://www.amazon.co.jp/dp/{{book.asin}}"><img src="https://iss.ndl.go.jp/thumbnail/{{ book.isbn }}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSA4LjVjMC0uODI4LjY3Mi0xLjUgMS41LTEuNXMxLjUuNjcyIDEuNSAxLjVjMCAuODI5LS42NzIgMS41LTEuNSAxLjVzLTEuNS0uNjcxLTEuNS0xLjV6bTkgLjVsLTIuNTE5IDQtMi40ODEtMS45Ni00IDUuOTZoMTRsLTUtOHptOC00djE0aC0yMHYtMTRoMjB6bTItMmgtMjR2MThoMjR2LTE4eiIvPjwvc3ZnPg==';"></a>
-                        <span class="balloon">クリックしてね</span>
-                    </td>
-                    <td class="txt">{{ book.title }}</td>
-                    <td class="price">{{ book.creator }}</td>
-
+                    <td><a href="http://www.amazon.co.jp/dp/{{book.asin}}"><img src="https://iss.ndl.go.jp/thumbnail/{{ book.isbn }}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSA4LjVjMC0uODI4LjY3Mi0xLjUgMS41LTEuNXMxLjUuNjcyIDEuNSAxLjVjMCAuODI5LS42NzIgMS41LTEuNSAxLjVzLTEuNS0uNjcxLTEuNS0xLjV6bTkgLjVsLTIuNTE5IDQtMi40ODEtMS45Ni00IDUuOTZoMTRsLTUtOHptOC00djE0aC0yMHYtMTRoMjB6bTItMmgtMjR2MThoMjR2LTE4eiIvPjwvc3ZnPg==';" style="width:50px; height: 50px;"  ></a></td>
+                    <td class="title"><a href="http://www.amazon.co.jp/dp/{{book.asin}}">{{ book.title }}</a></td>
+                    <td class="creator">{{ book.creator }}</td>
                     <td class="update">
                         <h3><a href="/{{book.id}}/update" role=" = button">編集</a></h3>
                         
                     </td>
                     <td class="delete">
-                        <h3><a href="/{{book.id}}/delete" role=" = button" onclick="return confirm('本当に削除しますか?')">削除</a></h3>
+                         <h3><a href="/{{book.id}}/delete" role=" = button" onclick="return confirm('本当に削除しますか?')">削除</a></h3> 
                     </td>
 
                 </tr>

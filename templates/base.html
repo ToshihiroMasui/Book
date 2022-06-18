@@ -20,33 +20,34 @@
                   </h1>
                   <nav class="gnav">
                     <ul class="gnav-list">
-                      <!-- <li class="gnav-item"><a href="/camera" role="button">カメラで登録</a></li> -->
-                      <li class="gnav-item"><a href="/isbn" role="button">ISBN登録画面</a></li>
-                      <li class="gnav-item"><a href="/create" role="button">新規登録画面</a></li>
+                      <li class="gnav-item"><a href="/isbn" role="button">本のコードで登録</a></li>
+                      <li class="gnav-item"><a href="/create" role="button">手動で登録</a></li>
                       <li class="gnav-item"><a href="/logout" role="button">ログアウト</a></li>
-                      <form method="POST">
-                        <input id="search" type="text" placeholder="本のタイトル" name="search-title" value="{{ session.get('title') }}">
+                      <form action="/index" method="post">
+                        <input id="search" type="text" placeholder="キーワード" name="search">
                         <input class="btn" type="submit" value="検  索">
+
+                        <select>
+                          <option name = "old" value="old">登録：古い順</option>
+                          <option name = "new" value="new">登録：新しい順</option>
+                          
+                          <input class="btn" type="submit" value="表示">
+                        </select>
                       </form>
                     </ul>
                   </nav>
               </div>
-          </header>
+            </header>
           <!-- /header -->
             {% block content%}{% endblock %}
-            <!-- /contact -->
             <div class="page-top" id="js-page-top">
                 <span class="material-icons-outlined">expand_less</span>
             </div>
-    
-
             <!-- footer -->
             <footer class="footer">
             <div class="copyright">&copy;TOSHIHIRO MASUI</div>
             </footer>
             <!-- /footer -->
-
-
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script type='text/javascript' src="js/script.js"></script>

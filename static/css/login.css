@@ -1,10 +1,5 @@
-/* layout */
-body,p,form,input {
-    margin: 0;
-  }
-  
-  #form {
-    width: 400px;
+#form {
+    width: 500px;
     margin: 30px auto;
     padding: 20px;
     border: 1px solid #555;
