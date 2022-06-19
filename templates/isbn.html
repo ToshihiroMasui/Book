@@ -1,11 +1,13 @@
 {% extends "base.html" %}
+{% block title %}ISBNで登録{% endblock title %} 
 {% block content%}
 
 <main class="content">
   <div class="mv">
     <div id="form">
-			<p class="form-title">ISBNで登録</p>
-			<h3>本の裏にある978から始まる13桁の数字を入力してください。本が登録されます。</h3>
+			<p class="form-title">本のコードで登録</p>
+			<h3>本の裏にある978から始まる13桁の数字を入力してください。本が登録されます。（ハイフンを除いて下さい）</h3>
+			<h4>お試し　9784798169101　　IT用語図鑑</h4>
 			<form method="POST">
 				<p>ISBN</p>
 				<p class="username">
@@ -13,6 +15,7 @@
 				</p>
 				
 				<p class="submit">
+					<input type="button" onclick="location.href='/index'" value="戻る">
 					<input type="submit" value="登録" />
 				</p>
 			</form>

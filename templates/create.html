@@ -1,10 +1,11 @@
 {% extends "base.html" %}
-
+{% block title %}テキストで登録{% endblock title %} 
 {% block content%}
 <main class="content">
     <div class="mv">
         <div id="form">
-            <p class="form-title">簡単入力</p>
+            <p class="form-title">手動で登録</p>
+			
             <form method="POST">
 				<p>タイトル</p>
 				<p class="username">
@@ -12,11 +13,12 @@
 				</p>
 				<p>著者</p>
 				<p class="pass">
-					<input type="text" name="creator" required="" />
+					<input type="text" name="creator" required=""/>
 				</p>
-				
 				<p class="submit">
-					<input type="submit" value="登録" />
+					<input type="button" onclick="location.href='/index'" value="戻る">
+					<input type="submit" value="登録">
+					
 				</p>
 			</form>
         </div>

@@ -1,8 +1,8 @@
 from ensurepip import bootstrap
 from flask import Flask #flask使用
-from flask import render_template, request , redirect #htmlテンプレート機能を使用
-from flask_sqlalchemy import SQLAlchemy #DB作成およびSQL操作のため
-
+from flask import render_template, request , redirect,session #htmlテンプレート機能を使用
+from flask_sqlalchemy import SQLAlchemy#DB作成およびSQL操作のため
+from sqlalchemy import or_
 from crypt import methods #パスワードの検証
 from email.policy import default #メールアドレス
 from enum import unique #一意の値 usernameに使用
@@ -32,6 +32,36 @@ app.config['ITEMS_PER_PAGE'] = 5
 db = SQLAlchemy(app)
 
 
+def search_title(search):
+    books = db.session.query(Book).filter(or_(Book.title.like('%' + search + '%'),Book.creator.like('%' + search + '%')))
+    books = books.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
+    session['search'] = search
+    session['sort'] = ""
+    return books
+
+def sort_value(sort_value, search = None):
+    if search != None:
+      books = db.session.query(Book).filter(or_(Book.title.like('%' + search + '%'),Book.creator.like('%' + search + '%')))
+      if sort_value == "asc":
+        books = books.order_by(Book.id.asc())
+        session['sort'] = "asc"
+      elif sort_value == "desc":
+        books = books.order_by(Book.id.desc())
+        session['sort'] = "desc"
+    else:
+      if sort_value == "asc":
+        books = Book.query.order_by(Book.id.asc())
+        session['sort'] = "asc"
+      elif sort_value == "desc":
+        books = Book.query.order_by(Book.id.desc())
+        session['sort'] = "desc"
+    return books
+
+
+
+
+
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 
@@ -43,9 +73,9 @@ class User(UserMixin,db.Model): #userテーブル作成
 
 class Book(db.Model): #Bookテーブル作成
     id = db.Column(db.Integer, primary_key=True)
-    isbn = db.Column(db.BIGINT, unique = True)
-    asin = db.Column(db.BIGINT, unique = True)
-    title = db.Column(db.String(50), unique = True)
+    isbn = db.Column(db.BIGINT, )
+    asin = db.Column(db.BIGINT, )
+    title = db.Column(db.String(50), )
     creator = db.Column(db.String(15))
     
 @login_manager.user_loader
@@ -61,13 +91,13 @@ def index():
     search = request.form.get('search')
     if request.method == 'POST':
         if not search == "":
-            books = db.session.query(Book).filter(Book.title.contains(search)).paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
-           
+            books = db.session.query(Book).filter(or_(Book.title.like('%' + search + '%'),Book.creator.like('%' + search + '%'))).paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
         else:
             books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
     else:
         books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
     return render_template('index.html', books=books,search = search)
+
 
 
 
@@ -164,11 +194,13 @@ def fetch_book_data():
 
             title = root.find('.//dc:title', ns).text
             creator = root.find('.//dc:creator', ns).text
+            creator = creator.replace("著","")
+
             asin = jan_to_asin(isbn)
             book = Book(title=title, creator=creator,isbn=isbn,asin=asin)
             db.session.add(book)
             db.session.commit()
-            return redirect('/index')
+            return redirect('/index') #戻す
         else: 
             return render_template('isbn.html')
     else: 
