@@ -58,6 +58,13 @@ td {
 	color : hsl(245, 82%, 43%);
   }
 
+.creator a{
+	color:black;
+}
+.creator a:hover{
+	color : hsl(245, 82%, 43%);
+  }
+
 .creator{
 	font-size: 15px;
 	width: 400px;

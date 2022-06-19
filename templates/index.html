@@ -27,7 +27,7 @@
                 <tr>
                     <td><a href="http://www.amazon.co.jp/dp/{{book.asin}}"><img src="https://iss.ndl.go.jp/thumbnail/{{ book.isbn }}" onerror="this.onerror=null;this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNNSA4LjVjMC0uODI4LjY3Mi0xLjUgMS41LTEuNXMxLjUuNjcyIDEuNSAxLjVjMCAuODI5LS42NzIgMS41LTEuNSAxLjVzLTEuNS0uNjcxLTEuNS0xLjV6bTkgLjVsLTIuNTE5IDQtMi40ODEtMS45Ni00IDUuOTZoMTRsLTUtOHptOC00djE0aC0yMHYtMTRoMjB6bTItMmgtMjR2MThoMjR2LTE4eiIvPjwvc3ZnPg==';" style="width:50px; height: 50px;"  ></a></td>
                     <td class="title"><a href="http://www.amazon.co.jp/dp/{{book.asin}}">{{ book.title }}</a></td>
-                    <td class="creator">{{ book.creator }}</td>
+                    <td class="creator"><a href="https://www.amazon.co.jp/s?k={{book.creator}}">{{ book.creator }}</a></td>
                     <td class="update">
                         <h3><a href="/{{book.id}}/update" role=" = button">編集</a></h3>
                         
