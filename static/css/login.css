@@ -24,7 +24,7 @@
   }
 
   #search{
-    width: 150px;
+    width: 170px;
     padding: 4px;
     font-size: 14px;
     border: solid #555 2px;
@@ -34,6 +34,7 @@
     color: #fff;
     background-color: #a57805;
     border-radius:3px;
+    margin-left: 5px;
   }
   .btn:hover{
     color: #fff;
@@ -92,6 +93,17 @@
     background: #37a4bf;
   }
 
-
-
+  select::-ms-expand {
+    display: none; /*--IEでデフォルトの矢印を消します--*/
+  }
   
+  select {
+    width:130px;/*--幅--*/
+    padding:5px;
+    margin-left: 40px;
+    font-size: 14px;
+    border-radius: 30px;
+    border: solid 2px #ccc;
+    background-image: ;
+  
+  }

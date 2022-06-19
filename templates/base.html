@@ -23,17 +23,23 @@
                       <li class="gnav-item"><a href="/isbn" role="button">本のコードで登録</a></li>
                       <li class="gnav-item"><a href="/create" role="button">手動で登録</a></li>
                       <li class="gnav-item"><a href="/logout" role="button">ログアウト</a></li>
-                      <form action="/index" method="post">
-                        <input id="search" type="text" placeholder="キーワード" name="search">
+                      <form method="post">
+                        <input id="search" type="text" placeholder="タイトル　or　著者" name="search">
                         <input class="btn" type="submit" value="検  索">
-
-                        <select>
-                          <option name = "old" value="old">登録：古い順</option>
-                          <option name = "new" value="new">登録：新しい順</option>
-                          
-                          <input class="btn" type="submit" value="表示">
-                        </select>
                       </form>
+                    
+                      <form method="post">
+                        <div>
+                          <select id="sort" name="sort">
+                            <option value="">並び替え</option>
+                            <option value="登録：新しい順">登録：新しい順</option>
+                            <option value="登録：古い順">登録：古い順</option>
+                            <input class="btn" type="submit" value="表示">
+                          </select>
+                        </div>
+                      </form>
+
+                      
                     </ul>
                   </nav>
               </div>
