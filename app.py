@@ -1,4 +1,3 @@
-from ensurepip import bootstrap
 from flask import Flask #flask使用
 from flask import render_template, request , redirect,session #htmlテンプレート機能を使用
 from flask_sqlalchemy import SQLAlchemy#DB作成およびSQL操作のため
@@ -8,63 +7,24 @@ from email.policy import default #メールアドレス
 from enum import unique #一意の値 usernameに使用
 from venv import create
 from matplotlib.pyplot import title
-
-
 from flask_login import UserMixin,LoginManager, login_user,logout_user, login_required #ログイン機能
 from werkzeug.security import generate_password_hash,check_password_hash #パスワードハッシュ化とチェック
 import os
+from datetime import datetime,timedelta #時間
 
-from datetime import datetime #時間
 import pytz #タイムゾーン設定
-
 import requests #ISBN 書籍情報
 import xml.etree.ElementTree as et 
-
-
-
-
-
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///book.db'
 app.config['SECRET_KEY'] = os.urandom(24)
+app.permanent_session_lifetime = timedelta(minutes=3)
 app.config['ITEMS_PER_PAGE'] = 5
 db = SQLAlchemy(app)
 
-
-def search_title(search):
-    books = db.session.query(Book).filter(or_(Book.title.like('%' + search + '%'),Book.creator.like('%' + search + '%')))
-    books = books.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
-    session['search'] = search
-    session['sort'] = ""
-    return books
-
-def sort_value(sort_value, search = None):
-    if search != None:
-      books = db.session.query(Book).filter(or_(Book.title.like('%' + search + '%'),Book.creator.like('%' + search + '%')))
-      if sort_value == "asc":
-        books = books.order_by(Book.id.asc())
-        session['sort'] = "asc"
-      elif sort_value == "desc":
-        books = books.order_by(Book.id.desc())
-        session['sort'] = "desc"
-    else:
-      if sort_value == "asc":
-        books = Book.query.order_by(Book.id.asc())
-        session['sort'] = "asc"
-      elif sort_value == "desc":
-        books = Book.query.order_by(Book.id.desc())
-        session['sort'] = "desc"
-    return books
-
-
-
-
-
-
 login_manager = LoginManager()
 login_manager.init_app(app)
-
 
 class User(UserMixin,db.Model): #userテーブル作成
     id = db.Column(db.Integer, primary_key=True)
@@ -77,39 +37,48 @@ class Book(db.Model): #Bookテーブル作成
     asin = db.Column(db.BIGINT, )
     title = db.Column(db.String(50), )
     creator = db.Column(db.String(15))
+
+# def search_title(search_title):
+#     books = db.session.query(Book).filter(or_(Book.title.like('%' + search_title + '%'),Book.creator.like('%' + search_title + '%')))
+#     books = books.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
+#     session['title'] = search_title
+#     return books
+
     
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-    
+
 @app.route("/") 
 def top():
     return render_template('top.html')
 
 @app.route("/index",methods=['GET','POST'])
 def index():
-    search = request.form.get('search')
+    search_title = request.form.get('search_title')
     if request.method == 'POST':
-        if not search == "":
-            books = db.session.query(Book).filter(or_(Book.title.like('%' + search + '%'),Book.creator.like('%' + search + '%'))).paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
+        if search_title != "":
+            books = db.session.query(Book).filter(or_(Book.title.like('%' + search_title + '%'),Book.creator.like('%' + search_title + '%')))
+            books = books.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
+            return render_template('index.html', books=books,search_title = search_title)
         else:
             books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
+            return render_template('index.html', books=books,search_title = search_title)
     else:
         books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
-    return render_template('index.html', books=books,search = search)
+        return render_template('index.html', books=books,search_title = search_title)
 
 
-
-
-
-            
 
 @app.route('/pages/<int:page_num>', methods=['GET','POST'])
 def index_pages(page_num):
-
     books = Book.query.paginate(page=page_num, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
     return render_template('index.html', books=books)
     
+
+
+
+
 @app.route("/signup",methods=['GET','POST'])
 def signup():
     if request.method == 'POST':
@@ -200,7 +169,7 @@ def fetch_book_data():
             book = Book(title=title, creator=creator,isbn=isbn,asin=asin)
             db.session.add(book)
             db.session.commit()
-            return redirect('/index') #戻す
+            return redirect('/index') 
         else: 
             return render_template('isbn.html')
     else: 
