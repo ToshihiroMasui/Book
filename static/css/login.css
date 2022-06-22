@@ -35,6 +35,8 @@
     background-color: #a57805;
     border-radius:3px;
     margin-left: 5px;
+    width: 70px;
+    height: 30px;
   }
   .btn:hover{
     color: #fff;
@@ -107,3 +109,4 @@
     background-image: ;
   
   }
+  
