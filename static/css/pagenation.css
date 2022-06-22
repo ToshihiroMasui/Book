@@ -1,69 +1,80 @@
-.pager  ul.pagination {
-    text-align: center;
+.pagination__item a, .pagination__item--current{
+  box-sizing: border-box;
+  display: block;
+  color: #FFF;
+  text-decoration: none;
+  text-align: center;
+  background: #a57805;
+  border: 1px solid #655141;
+  min-width: 3em;
+  transition: all .2s;
+  margin: 0 1px 0 0;
+  padding: calc(1em - 1px) 1em;
+}
+
+.pagination__item a:hover, .pagination__item--current:hover{
+  color: #655141;
+  background: #FFF;
+  border: 1px solid #655141;
+}
+
+.pagination {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  color: #A4A4A4;
+  line-height: 1;
+  margin: 0;
+  padding: 2em 0;
+}
+
+.pagination__list {
+  display: none;
+}
+
+.pagination__pos {
+  position: absolute;
+  top: -.5em;
+  left: 50%;
+  transform: translate(-50%, 0);
+  color: #655141;
+}
+
+.pagination__btn--prev {
+  order: 2;
+}
+
+.pagination__btn--next {
+  order: 4;
+}
+
+.pagination__btn--first {
+  order: 1;
+}
+
+.pagination__btn--last {
+  order: 5;
+}
+
+@media (min-width: 520px) {
+  .pagination__list {
+    order: 3;
+    display: flex;
+    list-style: none;
     margin: 0;
     padding: 0;
   }
-  
-  .pager .pagination li {
-    display: inline;
-    margin: 0 2px;
-    padding: 0;
-    display: inline-block;
-    background:#a57805;
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    position: relative;
+  .pagination__item {
+    margin: 0;
   }
-
-  
-  
-  .pager .pagination li a{
-    vertical-align: middle;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    display:table;
-    color: #fff;
-    text-decoration: none;
+  .pagination__item--current {
+    background: #FFF;
+    color: #f70000;
+    font-weight: bold;
+    border: 1px solid #655141;
+    margin: 0 1px 0 0;
   }
-
-
-  
-  .pager .pagination li a span{
-    display:table-cell;
-    vertical-align:middle;
+  .pagination__pos {
+    display: none;
   }
-
-
-  
-  .pager .pagination li a:hover,
-  .pager .pagination li a.active{
-    color: #000;
-    background:#efaf0e;
-  }
-
-  
-  
-  @media only screen and (max-width: 767px){
-    .pager .pagination li{
-      display: none;
-    }
-  
-    .pager .pagination li.pre,
-    .pager .pagination li.next{
-      display: inline-block;
-      width: 40%;
-      height: 50px;
-      text-align: center;
-    }
-  
-    .pager .pagination li.pre a,
-    .pager .pagination li.next a{
-      width: 100%;
-      text-align: center;
-    }
-  }
+}
