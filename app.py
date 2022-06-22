@@ -1,3 +1,4 @@
+# from re import search
 from flask import Flask #flask使用
 from flask import render_template, request , redirect,session #htmlテンプレート機能を使用
 from flask_sqlalchemy import SQLAlchemy#DB作成およびSQL操作のため
@@ -58,6 +59,7 @@ def index():
     search_title = request.form.get('search_title')
     if request.method == 'POST':
         if search_title != "":
+            session['title'] = search_title
             books = db.session.query(Book).filter(or_(Book.title.like('%' + search_title + '%'),Book.creator.like('%' + search_title + '%')))
             books = books.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
             return render_template('index.html', books=books,search_title = search_title)
@@ -65,6 +67,7 @@ def index():
             books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
             return render_template('index.html', books=books,search_title = search_title)
     else:
+        session.pop('title', None)
         books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
         return render_template('index.html', books=books,search_title = search_title)
 
@@ -72,7 +75,13 @@ def index():
 
 @app.route('/pages/<int:page_num>', methods=['GET','POST'])
 def index_pages(page_num):
-    books = Book.query.paginate(page=page_num, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
+    if "title" in session:
+        search_title  = session['title']
+        books = db.session.query(Book).filter(or_(Book.title.like('%' + search_title + '%'),Book.creator.like('%' + search_title + '%')))
+        books = books.paginate(page_num, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
+    
+    else:
+        books = Book.query.paginate(page=page_num, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
     return render_template('index.html', books=books)
     
 
