@@ -93,7 +93,7 @@ a {
   padding: 10px;
   cursor: pointer;
   text-align: center;
-  background-color: #4c4c4c;
+  background-color: #a57805;
 }
 
 .page-top .material-icons-outlined {
@@ -104,11 +104,11 @@ a {
 
 .footer {
   padding: 30px;
-  background-color: #f0c89c;
+  background-color: #fff;
 }
 
 .copyright {
   font-size: 10px;
   text-align: center;
-  color: #fff;
+  color: #000;
 }

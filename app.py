@@ -39,13 +39,6 @@ class Book(db.Model): #Bookテーブル作成
     title = db.Column(db.String(50), )
     creator = db.Column(db.String(15))
 
-# def search_title(search_title):
-#     books = db.session.query(Book).filter(or_(Book.title.like('%' + search_title + '%'),Book.creator.like('%' + search_title + '%')))
-#     books = books.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
-#     session['title'] = search_title
-#     return books
-
-    
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -62,14 +55,14 @@ def index():
             session['title'] = search_title
             books = db.session.query(Book).filter(or_(Book.title.like('%' + search_title + '%'),Book.creator.like('%' + search_title + '%')))
             books = books.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
-            return render_template('index.html', books=books,search_title = search_title)
+            
         else:
             books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
-            return render_template('index.html', books=books,search_title = search_title)
+            
     else:
         session.pop('title', None)
         books = Book.query.paginate(page=1, per_page=app.config['ITEMS_PER_PAGE'], error_out=False)
-        return render_template('index.html', books=books,search_title = search_title)
+    return render_template('index.html', books=books,search_title = search_title)
 
 
 
