@@ -40,8 +40,10 @@ a {
   letter-spacing: .05em;
 }
 
+
 .header-logo a {
   color: #333;
+  font-size: xx-large;
 }
 
 .gnav-list {
